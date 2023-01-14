@@ -1,10 +1,9 @@
 <script lang="ts">
+    import _ from 'lodash'
     import { goto } from '$app/navigation';
 
 	import SearchBox from "$components/SearchBox.svelte";
 	import RangeStepped from "$components/RangeStepped.svelte";
-
-    import _ from 'lodash'
 	import BigNumberInput from '$components/BigNumberInput.svelte';
 
     let isLoading = false;
@@ -12,7 +11,7 @@
     let letters: string[] = [];
 
     function getWord() {
-        return letters.join("")
+        return letters.map(v => v || '?').join('')
     }
     
     function handleSearchBoxInit(event: CustomEvent) {
@@ -32,7 +31,6 @@
     }
 </script>
 
-<h1 class="title my-4">Word Search</h1>
 
 <div class="section">
     <h2 class="subtitle">1. Word Length</h2>
@@ -49,13 +47,13 @@
 
 <div class="section">
     <h2 class="subtitle">2. Known Letters</h2>
-    <p>The Word:</p>
-        
-    {#each Array(numberOfLetters) as _, index}
-        <span>{letters[index]}</span>
-    {/each}
     
-    <div class="flex flex-row flex-wrap my-2">
+    <!-- <p>The Word:</p>
+    {#each Array(numberOfLetters) as _, index}
+        <span>{letters[index] || '?'}</span>
+    {/each} -->
+    
+    <div class="flex flex-row flex-wrap my-6 gap-2">
         {#each Array(numberOfLetters) as _, index}
             <SearchBox 
                 on:created={handleSearchBoxInit} 

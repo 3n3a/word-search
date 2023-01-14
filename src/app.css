@@ -23,9 +23,13 @@
 }
 
 .subtitle {
-    @apply mt-4 text-3xl sm:text-4xl text-slate-900 font-extrabold tracking-tight dark:text-slate-50 mb-4;
+    @apply text-3xl sm:text-4xl text-slate-900 font-extrabold tracking-tight dark:text-slate-50;
 }
 
 .section {
     @apply container my-16;
+}
+
+.navbar-main {
+    @apply navbar justify-center bg-accent text-primary-content;
 }

@@ -5,7 +5,7 @@
     const dispatch = createEventDispatcher();
 
 
-    export let value: string = '?';
+    export let value: string = '';
     export let index: number;
 
     onMount(() => {
@@ -23,4 +23,4 @@
     })
 </script>
 
-<input type="text" class="input input-bordered input-accent w-11 max-w-xs" maxlength="1" bind:value={value} />
+<input type="text" class="input px-3 text-center input-bordered input-accent w-11 max-w-xs" maxlength="1" bind:value={value} />
