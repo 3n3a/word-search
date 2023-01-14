@@ -4,5 +4,9 @@ module.exports = {
         './src/app.html'
     ],
     plugins: [require('daisyui')],
+    daisyui: {
+        themes: ["night"],
+        darkTheme: "night",
+    }
 };
   

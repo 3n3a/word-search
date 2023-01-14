@@ -1,5 +1,26 @@
 <script lang="ts">
-    export let value: string = '';
+	import { onMount, onDestroy } from "svelte";
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
+
+
+    export let value: string = '?';
+    export let index: number;
+
+    onMount(() => {
+        dispatch('created', {
+            index: index,
+            value: value,
+        });
+    })
+
+    onDestroy(() => {
+        dispatch('destroyed', {
+            index: index,
+            value: value,
+        });
+    })
 </script>
 
-<input type="text" class="input input-bordered input-info w-4" bind:value={value} />
+<input type="text" class="input input-bordered input-accent w-11 max-w-xs" bind:value={value} />
