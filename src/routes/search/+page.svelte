@@ -13,7 +13,7 @@ import type { PageData } from './$types';
         Back
     </a>
     
-    <div class="flex md:flex-row flex-col gap-4">
+    <div class="flex md:flex-row flex-wrap flex-col gap-4">
         <h2 class="subtitle">{data.titlePrefix}</h2>
 
         <div class="flex flex-row gap-1">
