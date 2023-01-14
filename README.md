@@ -5,6 +5,7 @@
 * https://tailwindcss.com/docs/container
 * https://kit.svelte.dev/docs/load#redirects
 * https://www.datamuse.com/api/
+* https://heroicons.com/
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
