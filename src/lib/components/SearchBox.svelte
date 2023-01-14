@@ -23,4 +23,4 @@
     })
 </script>
 
-<input type="text" class="input input-bordered input-accent w-11 max-w-xs" max-length="1" bind:value={value} />
+<input type="text" class="input input-bordered input-accent w-11 max-w-xs" maxlength="1" bind:value={value} />
