@@ -5,7 +5,9 @@
 	import RangeStepped from "$components/RangeStepped.svelte";
 
     import _ from 'lodash'
+	import BigNumberInput from '$components/BigNumberInput.svelte';
 
+    let isLoading = false;
     let numberOfLetters = 1;
     let letters: string[] = [];
 
@@ -24,37 +26,53 @@
     }
 
     function searchForWord(event: any) {
+        isLoading = true
         const word = getWord()
         goto(`/search?q=${word}`)
     }
 </script>
 
-<h1 class="inline-block text-2xl sm:text-3xl font-extrabold tracking-tight mb-4">Word Search</h1>
-    
-<p>Number of Letters: {numberOfLetters}</p>
-<p>The Word:</p>
-    
-{#each Array(numberOfLetters) as _, index}
-    <span>{letters[index]}</span>
-{/each}
+<h1 class="title my-4">Word Search</h1>
 
-<div class="flex flex-row flex-wrap my-2">
+<div class="section">
+    <h2 class="subtitle">1. Word Length</h2>
+
+    <div class="my-6">
+        <BigNumberInput bind:value={numberOfLetters} />
+    </div>
+    
+    <div class="my-8">
+        <RangeStepped bind:value={numberOfLetters} />
+    </div>
+</div>
+    
+
+<div class="section">
+    <h2 class="subtitle">2. Known Letters</h2>
+    <p>The Word:</p>
+        
     {#each Array(numberOfLetters) as _, index}
-        <SearchBox 
-            on:created={handleSearchBoxInit} 
-            on:destroyed={handleSearchBoxDestroy} 
-            index={index}
-            bind:value={letters[index]} 
-        />
+        <span>{letters[index]}</span>
     {/each}
+    
+    <div class="flex flex-row flex-wrap my-2">
+        {#each Array(numberOfLetters) as _, index}
+            <SearchBox 
+                on:created={handleSearchBoxInit} 
+                on:destroyed={handleSearchBoxDestroy} 
+                index={index}
+                bind:value={letters[index]} 
+            />
+        {/each}
+    </div>
 </div>
 
-<div class="my-4">
-    <RangeStepped bind:value={numberOfLetters} />
+<div class="section">
+    <button 
+        on:click={searchForWord}
+        class="btn btn-accent btn-block"
+        class:loading={isLoading}
+    >
+        Search
+    </button>
 </div>
-
-<button 
-    on:click={searchForWord}
-    class="btn btn-accent btn-block">
-    Search
-</button>
