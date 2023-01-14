@@ -3,7 +3,7 @@ module.exports = {
         './src/**/*.{svelte,js,ts}',
         './src/app.html'
     ],
-    plugins: [require('daisyui')],
+    plugins: [require("@tailwindcss/typography"), require('daisyui')],
     daisyui: {
         themes: ["night"],
         darkTheme: "night",

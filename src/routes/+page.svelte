@@ -29,30 +29,33 @@
     }
 </script>
 
-<h1>Word Search</h1>
-
-<p>Number of Letters: {numberOfLetters}</p>
-<p>The Word:</p>
-
-{#each Array(numberOfLetters) as _, index}
-    <span>{letters[index]}</span>
-{/each}
-
-<div class="search-row">
+<div class="prose w-full">
+    <h1 class="heading-1">Word Search</h1>
+    
+    <p>Number of Letters: {numberOfLetters}</p>
+    <p>The Word:</p>
+    
     {#each Array(numberOfLetters) as _, index}
-        <SearchBox 
-            on:created={handleSearchBoxInit} 
-            on:destroyed={handleSearchBoxDestroy} 
-            index={index}
-            bind:value={letters[index]} 
-        />
+        <span>{letters[index]}</span>
     {/each}
+    
+    <div class="search-row">
+        {#each Array(numberOfLetters) as _, index}
+            <SearchBox 
+                on:created={handleSearchBoxInit} 
+                on:destroyed={handleSearchBoxDestroy} 
+                index={index}
+                bind:value={letters[index]} 
+            />
+        {/each}
+    </div>
+    
+    <RangeStepped bind:value={numberOfLetters} />
+    
+    <button 
+        on:click={searchForWord}
+        class="btn btn-accent">
+        Search
+    </button>
+
 </div>
-
-<RangeStepped bind:value={numberOfLetters} />
-
-<button 
-    on:click={searchForWord}
-    class="btn btn-accent">
-    Search
-</button>
