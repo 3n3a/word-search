@@ -1,10 +1,8 @@
 <script lang="ts">
-    import _ from 'lodash'
     import { goto } from '$app/navigation';
+	import LetterInput from '$lib/components/LetterInput.svelte';
 
-	import SearchBox from "$components/SearchBox.svelte";
-	import RangeStepped from "$components/RangeStepped.svelte";
-	import BigNumberInput from '$components/BigNumberInput.svelte';
+	import NumberSliderInput from '$lib/components/NumberSliderInput.svelte';
 
     let isLoading = false;
     let numberOfLetters = 1;
@@ -14,31 +12,10 @@
         return letters.map(v => v || '?').join('')
     }
     
-    function handleSearchBoxInit(event: CustomEvent) {
-        const { index, value } = event.detail;
-        letters[index] = value;
-    }
-
-    function handleSearchBoxDestroy(event: CustomEvent) {
-        let { index, value } = event.detail;
-        _.pullAt(letters, [index])
-    }
-
     function searchForWord(event: any) {
         isLoading = true
         const word = getWord()
         goto(`/search?q=${word}`)
-    }
-
-    function handleLetterInput(event: CustomEvent) {
-        let { index, } = event.detail;
-        const nextIndex = index + 1;
-
-        if (letters.length >= nextIndex + 1) {
-            const newElement = document.getElementById(`input-search-${nextIndex.toFixed()}`)
-            newElement?.focus();
-            console.log("next letter")
-        }
     }
 </script>
 
@@ -46,35 +23,14 @@
 <div class="section">
     <h2 class="subtitle">1. Word Length</h2>
 
-    <div class="my-6">
-        <BigNumberInput bind:value={numberOfLetters} />
-    </div>
-    
-    <div class="my-8">
-        <RangeStepped bind:value={numberOfLetters} />
-    </div>
+    <NumberSliderInput bind:numberOfLetters={numberOfLetters} />
 </div>
     
 
 <div class="section">
     <h2 class="subtitle">2. Known Letters</h2>
     
-    <!-- <p>The Word:</p>
-    {#each Array(numberOfLetters) as _, index}
-        <span>{letters[index] || '?'}</span>
-    {/each} -->
-    
-    <div class="flex flex-row flex-wrap my-6 gap-2">
-        {#each Array(numberOfLetters) as _, index}
-            <SearchBox 
-                on:created={handleSearchBoxInit} 
-                on:destroyed={handleSearchBoxDestroy}
-                on:has-letter={handleLetterInput}
-                index={index}
-                bind:value={letters[index]} 
-            />
-        {/each}
-    </div>
+    <LetterInput bind:numberOfLetters={numberOfLetters} bind:letters={letters} />
 </div>
 
 <div class="section">
