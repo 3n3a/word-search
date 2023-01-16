@@ -16,7 +16,7 @@ import type { PageData } from './$types';
     <div class="flex md:flex-row flex-wrap flex-col gap-4">
         <h2 class="subtitle">{data.titlePrefix}</h2>
 
-        <div class="flex flex-row gap-1">
+        <div class="flex flex-row flex-wrap gap-1">
             {#each data.titleQuery.split("") as letter}
                 <kbd class="kbd kbd-md">{letter}</kbd>
             {/each}
