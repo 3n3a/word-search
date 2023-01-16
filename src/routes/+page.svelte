@@ -29,6 +29,17 @@
         const word = getWord()
         goto(`/search?q=${word}`)
     }
+
+    function handleLetterInput(event: CustomEvent) {
+        let { index, } = event.detail;
+        const nextIndex = index + 1;
+
+        if (letters.length >= nextIndex + 1) {
+            const newElement = document.getElementById(`input-search-${nextIndex.toFixed()}`)
+            newElement?.focus();
+            console.log("next letter")
+        }
+    }
 </script>
 
 
@@ -57,7 +68,8 @@
         {#each Array(numberOfLetters) as _, index}
             <SearchBox 
                 on:created={handleSearchBoxInit} 
-                on:destroyed={handleSearchBoxDestroy} 
+                on:destroyed={handleSearchBoxDestroy}
+                on:has-letter={handleLetterInput}
                 index={index}
                 bind:value={letters[index]} 
             />
